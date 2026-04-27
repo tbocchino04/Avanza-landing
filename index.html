@@ -1085,12 +1085,13 @@
       const btn = wlForm.querySelector('button[type="submit"]');
       btn.disabled = true; btn.textContent = 'Enviando…';
       try {
-        const res = await fetch('https://formspree.io/tbocchino04@gmail.com', {
+        const res = await fetch('https://formsubmit.co/ajax/tbocchino04@gmail.com', {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: document.getElementById('wlEmail').value })
+          body: JSON.stringify({ email: document.getElementById('wlEmail').value, _captcha: 'false' })
         });
-        if (res.ok) {
+        const data = await res.json();
+        if (res.ok && data.success) {
           wlForm.style.display = 'none';
           wlMsg.textContent = '✓  ¡Listo! Te avisamos cuando lancemos.';
           wlMsg.classList.add('show', 'ok');
