@@ -250,13 +250,6 @@
       padding-right: 5%;
     }
     .bldg-svg { width: 290px; flex-shrink: 0; opacity: .09; margin-bottom: -2px; }
-    .build-clip-rect { y: 520px; animation: buildReveal 10s ease-in-out infinite; }
-    @keyframes buildReveal {
-      0%, 8%    { y: 520px; }
-      62%       { y: 0px; }
-      80%       { y: 0px; }
-      94%, 100% { y: 520px; }
-    }
     @media (max-width: 768px) { .bldg-wrap { display: none; } }
 
     /* ══════════════════════════════════════════════════════
@@ -552,7 +545,14 @@
     <svg class="bldg-svg" viewBox="0 0 300 520" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id="bc">
-          <rect class="build-clip-rect" x="0" width="300" height="520"/>
+          <rect x="0" width="300" height="520">
+            <animate attributeName="y"
+              values="520;520;0;0;520;520"
+              keyTimes="0;0.08;0.62;0.80;0.94;1"
+              dur="10s" repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0 0 0 0;0.4 0 0.2 1;0 0 0 0;0.4 0 0.2 1;0 0 0 0"/>
+          </rect>
         </clipPath>
       </defs>
 
