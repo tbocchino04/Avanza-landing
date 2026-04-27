@@ -282,6 +282,43 @@
     }
 
     /* ══════════════════════════════════════════════════════
+       WAITLIST / ACCESO ANTICIPADO
+    ══════════════════════════════════════════════════════ */
+    .waitlist {
+      padding: clamp(56px, 7vw, 88px) 0;
+      background: var(--sand);
+    }
+    .waitlist-inner {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 18px;
+    }
+    .waitlist h2 { font-size: clamp(26px, 3.5vw, 44px); color: var(--dark); }
+    .waitlist h2 em { font-style: normal; color: var(--v); }
+    .waitlist-sub { font-size: 16px; color: var(--concrete); line-height: 1.65; max-width: 460px; }
+    .waitlist-form {
+      display: flex; gap: 10px; width: 100%; max-width: 500px;
+      flex-wrap: wrap; justify-content: center; margin-top: 4px;
+    }
+    .wl-input {
+      flex: 1; min-width: 240px;
+      padding: 14px 18px; border-radius: 10px;
+      border: 1.5px solid var(--sand-d);
+      font-family: var(--bf); font-size: 15px; color: var(--dark);
+      background: var(--white); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .wl-input:focus { border-color: var(--v); box-shadow: 0 0 0 3px rgba(91,61,200,.1); }
+    .wl-input::placeholder { color: var(--concrete); }
+    .wl-msg {
+      font-size: 14px; font-weight: 500; display: none;
+      align-items: center; gap: 6px;
+    }
+    .wl-msg.show { display: flex; }
+    .wl-msg.ok  { color: #16A34A; }
+    .wl-msg.err { color: #DC2626; }
+    .wl-note { font-size: 12px; color: var(--concrete); opacity: .75; }
+
+    /* ══════════════════════════════════════════════════════
        STATS STRIP
     ══════════════════════════════════════════════════════ */
     .stats { background: var(--sand); border-top: 1px solid var(--sand-d); border-bottom: 1px solid var(--sand-d); padding: 40px 0; }
@@ -526,7 +563,7 @@
         <li><a href="#pricing">Precios</a></li>
       </ul>
 
-      <a href="#" class="btn btn-primary nav-cta">Empezar gratis</a>
+      <a href="#waitlist" class="btn btn-primary nav-cta">Empezar gratis</a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -541,7 +578,7 @@
     <li><a href="#how">Cómo funciona</a></li>
     <li><a href="#pricing">Precios</a></li>
   </ul>
-  <a href="#" class="btn btn-primary btn-lg">Empezar gratis</a>
+  <a href="#waitlist" class="btn btn-primary btn-lg">Empezar gratis</a>
 </div>
 
 <!-- ══ HERO ══════════════════════════════════════════════ -->
@@ -615,7 +652,7 @@
           El avance real de tu proyecto, en tiempo real.
         </p>
         <div class="hero-ctas">
-          <a href="#" class="btn btn-primary btn-lg">Empezar gratis →</a>
+          <a href="#waitlist" class="btn btn-primary btn-lg">Empezar gratis →</a>
           <a href="#how" class="btn btn-ghost btn-lg">Ver cómo funciona</a>
         </div>
         <p class="hero-note">Sin tarjeta de crédito &nbsp;·&nbsp; Cancelá cuando quieras</p>
@@ -642,6 +679,23 @@
       <span class="scroll-label">a v a n z a r</span>
     </div>
 
+  </div>
+</section>
+
+<!-- ══ WAITLIST ════════════════════════════════════════════ -->
+<section class="waitlist" id="waitlist">
+  <div class="container">
+    <div class="waitlist-inner fu">
+      <span class="chip">Acceso anticipado</span>
+      <h2>Sé de los primeros en <em>probar Avanza.</em></h2>
+      <p class="waitlist-sub">Dejá tu email y te avisamos cuando abramos nuevos accesos. Sin spam, sin compromisos.</p>
+      <form class="waitlist-form" id="wlForm">
+        <input class="wl-input" id="wlEmail" type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-primary">Quiero acceso →</button>
+      </form>
+      <span class="wl-msg" id="wlMsg"></span>
+      <p class="wl-note">Sin tarjeta de crédito &nbsp;·&nbsp; Tu email es privado</p>
+    </div>
   </div>
 </section>
 
@@ -931,7 +985,7 @@
     <h2>Organizá tu obra.<br>Impresioná a tu cliente.</h2>
     <p>Empezá gratis hoy. Tu primer proyecto listo en menos de 10 minutos. Sin tarjeta de crédito.</p>
     <div class="cta-fin-acts">
-      <a href="#" class="btn btn-amber btn-lg">Empezar gratis →</a>
+      <a href="#waitlist" class="btn btn-amber btn-lg">Empezar gratis →</a>
       <a href="#" class="btn btn-ghost btn-lg">Hablar con ventas</a>
     </div>
   </div>
@@ -1021,6 +1075,35 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
   document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+  // Waitlist form — Formspree
+  const wlForm = document.getElementById('wlForm');
+  const wlMsg  = document.getElementById('wlMsg');
+  if (wlForm) {
+    wlForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = wlForm.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      try {
+        const res = await fetch('https://formspree.io/tbocchino04@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: document.getElementById('wlEmail').value })
+        });
+        if (res.ok) {
+          wlForm.style.display = 'none';
+          wlMsg.textContent = '✓  ¡Listo! Te avisamos cuando lancemos.';
+          wlMsg.classList.add('show', 'ok');
+        } else {
+          throw new Error();
+        }
+      } catch {
+        wlMsg.textContent = '✕  Algo falló. Intentá de nuevo.';
+        wlMsg.classList.add('show', 'err');
+        btn.disabled = false; btn.textContent = 'Quiero acceso →';
+      }
+    });
+  }
 
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
