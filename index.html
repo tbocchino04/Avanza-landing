@@ -19,6 +19,9 @@
       --dark:     #0D0A1E;
       --amber:    #F5A623;
       --white:    #FFFFFF;
+      --sand:     #F5F0E8;
+      --sand-d:   #EDE5D8;
+      --concrete: #7A7570;
       --g100:     #EDE9FF;
       --g200:     #C8C4E0;
       --g500:     #8B87AA;
@@ -118,18 +121,21 @@
     ══════════════════════════════════════════════════════ */
     .hero {
       padding-top: 148px; padding-bottom: clamp(80px, 10vw, 140px);
-      background: var(--vbg); position: relative; overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(10,8,20,.80) 0%, rgba(25,15,8,.88) 100%),
+        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80') center 40% / cover no-repeat;
+      position: relative; overflow: hidden;
     }
     .hero::before {
       content: ''; position: absolute;
-      width: 900px; height: 900px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(155,114,248,.22) 0%, transparent 65%);
-      top: -300px; right: -250px; pointer-events: none;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,.1) 0%, transparent 65%);
+      top: -200px; right: -150px; pointer-events: none;
     }
     .hero::after {
       content: ''; position: absolute;
       width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(91,61,200,.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(91,61,200,.18) 0%, transparent 70%);
       bottom: -100px; left: -100px; pointer-events: none;
     }
     .hero-inner {
@@ -140,25 +146,25 @@
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(91,61,200,.1); border: 1px solid rgba(91,61,200,.2);
-      color: var(--v); font-size: 13px; font-weight: 600;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.9); font-size: 13px; font-weight: 600;
       padding: 5px 14px 5px 6px; border-radius: 100px; margin-bottom: 28px;
     }
     .hero-badge-dot {
-      width: 22px; height: 22px; background: var(--v); border-radius: 50%;
+      width: 22px; height: 22px; background: var(--amber); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 11px; flex-shrink: 0;
+      color: var(--dark); font-size: 11px; flex-shrink: 0;
     }
     .hero-badge-dot::after { content: ''; }
     .pulse { animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
 
-    .hero h1 { font-size: clamp(44px, 5.5vw, 76px); color: var(--dark); margin-bottom: 24px; }
-    .hero h1 em { font-style: normal; color: var(--v); }
-    .hero-sub { font-size: clamp(16px, 1.7vw, 19px); color: var(--g500); line-height: 1.72; margin-bottom: 40px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .hero h1 { font-size: clamp(44px, 5.5vw, 76px); color: var(--white); margin-bottom: 24px; }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero-sub { font-size: clamp(16px, 1.7vw, 19px); color: rgba(255,255,255,.65); line-height: 1.72; margin-bottom: 40px; max-width: 580px; margin-left: auto; margin-right: auto; }
     .hero-ctas { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
-    .hero-note { font-size: 13px; color: var(--g500); display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .hero-note::before { content: '✓'; color: #22C55E; font-weight: 700; }
+    .hero-note { font-size: 13px; color: rgba(255,255,255,.45); display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .hero-note::before { content: '✓'; color: #4ADE80; font-weight: 700; }
 
     /* Mockup */
     .hero-visual { width: 100%; display: flex; justify-content: center; }
@@ -249,7 +255,7 @@
       display: flex; align-items: flex-end; justify-content: flex-end;
       padding-right: 5%;
     }
-    .bldg-svg { width: 290px; flex-shrink: 0; opacity: .09; margin-bottom: -2px; }
+    .bldg-svg { width: 290px; flex-shrink: 0; opacity: .13; margin-bottom: -2px; color: #fff; }
     @media (max-width: 768px) { .bldg-wrap { display: none; } }
 
     /* ══════════════════════════════════════════════════════
@@ -272,13 +278,13 @@
     .scroll-label {
       font-family: var(--bf); font-size: 11px; font-weight: 500;
       letter-spacing: .32em; text-transform: lowercase;
-      color: var(--v); opacity: .5;
+      color: rgba(255,255,255,.4);
     }
 
     /* ══════════════════════════════════════════════════════
        STATS STRIP
     ══════════════════════════════════════════════════════ */
-    .stats { background: var(--white); border-top: 1px solid #EDE9FF; border-bottom: 1px solid #EDE9FF; padding: 40px 0; }
+    .stats { background: var(--sand); border-top: 1px solid var(--sand-d); border-bottom: 1px solid var(--sand-d); padding: 40px 0; }
     .stats-inner { display: flex; align-items: center; justify-content: center; gap: clamp(32px, 6vw, 96px); flex-wrap: wrap; }
     .stat { text-align: center; }
     .stat-num { font-family: var(--hf); font-size: clamp(28px, 3.5vw, 42px); color: var(--v); letter-spacing: -2px; }
@@ -289,10 +295,11 @@
     ══════════════════════════════════════════════════════ */
     .problem { padding: clamp(80px, 10vw, 140px) 0; background: var(--white); }
 
+
     .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .pain-card {
       padding: 32px; border-radius: 20px;
-      background: var(--vbg); border: 1px solid rgba(91,61,200,.07);
+      background: var(--sand); border: 1px solid var(--sand-d);
       transition: transform .2s, box-shadow .2s;
     }
     .pain-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(91,61,200,.12); }
@@ -307,7 +314,7 @@
     /* ══════════════════════════════════════════════════════
        FEATURES
     ══════════════════════════════════════════════════════ */
-    .features { padding: clamp(80px, 10vw, 140px) 0; background: var(--vbg); }
+    .features { padding: clamp(80px, 10vw, 140px) 0; background: var(--sand); }
 
     .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .feat-card {
@@ -415,7 +422,7 @@
     /* ══════════════════════════════════════════════════════
        TESTIMONIALS
     ══════════════════════════════════════════════════════ */
-    .testi { padding: clamp(80px, 10vw, 140px) 0; background: var(--vbg); }
+    .testi { padding: clamp(80px, 10vw, 140px) 0; background: var(--sand); }
     .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .tc {
       background: var(--white); border-radius: 20px; padding: 32px;
@@ -609,7 +616,7 @@
         </p>
         <div class="hero-ctas">
           <a href="#" class="btn btn-primary btn-lg">Empezar gratis →</a>
-          <a href="#how" class="btn btn-outline btn-lg">Ver cómo funciona</a>
+          <a href="#how" class="btn btn-ghost btn-lg">Ver cómo funciona</a>
         </div>
         <p class="hero-note">Sin tarjeta de crédito &nbsp;·&nbsp; Cancelá cuando quieras</p>
       </div>
@@ -629,8 +636,8 @@
 
     <div class="scroll-cue" id="scrollCue">
       <svg class="scroll-arrow" width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="12" y1="0" x2="12" y2="40" stroke="#5B3DC8" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M4 32 L12 42 L20 32" stroke="#5B3DC8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <line x1="12" y1="0" x2="12" y2="40" stroke="rgba(255,255,255,.45)" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M4 32 L12 42 L20 32" stroke="rgba(255,255,255,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
       <span class="scroll-label">a v a n z a r</span>
     </div>
