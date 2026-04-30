@@ -434,6 +434,16 @@
     ══════════════════════════════════════════════════════ */
     .features { padding: clamp(80px, 10vw, 140px) 0; background: var(--sand); }
 
+    .feat-sections { display: flex; flex-direction: column; gap: 60px; }
+    .feat-section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--v); margin-bottom: 24px;
+    }
+    .feat-section-label::before {
+      content: ''; width: 22px; height: 2px;
+      background: var(--v); border-radius: 2px; flex-shrink: 0;
+    }
     .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .feat-card {
       background: var(--white); border-radius: 20px; padding: 36px;
@@ -813,150 +823,165 @@
       <h2>Todo lo que tu obra necesita, en un solo lugar</h2>
       <p>Diseñado para constructoras, arquitectos y jefes de obra que quieren información clara, siempre actualizada.</p>
     </div>
-    <div class="feat-grid">
+    <div class="feat-sections">
 
-      <!-- Wide card: Checklist -->
-      <div class="feat-card wide fu">
-        <div>
+    <!-- ── Bloque 1 ── -->
+    <div>
+      <div class="feat-section-label">Para gestionar tu obra</div>
+      <div class="feat-grid">
+
+        <!-- Wide card: Checklist -->
+        <div class="feat-card wide fu">
+          <div>
+            <div class="feat-icon">
+              <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="20" height="20" rx="3"/>
+                <path d="M8 13l3.5 3.5L18 9"/>
+              </svg>
+            </div>
+            <h3>Checklist de tareas</h3>
+            <p>Asigná tareas a tu equipo, establecé prioridades y seguí el estado en tiempo real. Nada queda en el aire, nada se pierde entre mensajes.</p>
+            <ul class="feat-list">
+              <li>Estados: pendiente, en curso, completado</li>
+              <li>Comentarios y adjuntos por tarea</li>
+            </ul>
+          </div>
+          <div class="feat-phone">
+            <div class="phone">
+              <img src="img-detalle.png" alt="Checklist de obra en Avanza" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Avance de obra -->
+        <div class="feat-card fu">
           <div class="feat-icon">
             <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="20" height="20" rx="3"/>
-              <path d="M8 13l3.5 3.5L18 9"/>
+              <polyline points="3,19 7,11 11,15 15,7 19,13 23,5"/>
+              <line x1="3" y1="23" x2="23" y2="23"/>
             </svg>
           </div>
-          <h3>Checklist de tareas</h3>
-          <p>Asigná tareas a tu equipo, establecé prioridades y seguí el estado en tiempo real. Nada queda en el aire, nada se pierde entre mensajes.</p>
+          <h3>Avance de obra</h3>
+          <p>Visualizá el progreso de cada etapa con porcentajes claros y actualizados. Sabé exactamente en qué punto está cada parte de tu proyecto.</p>
           <ul class="feat-list">
-            <li>Estados: pendiente, en curso, completado</li>
-            <li>Comentarios y adjuntos por tarea</li>
+            <li>Progreso por etapa y sub-etapa</li>
+            <li>Historial de actualizaciones</li>
+          </ul>
+          <div class="feat-phone">
+            <div class="phone"><img src="img-overview.png" alt="Avance por etapas en Avanza" loading="lazy"></div>
+          </div>
+        </div>
+
+        <!-- Card: Control financiero -->
+        <div class="feat-card fu">
+          <div class="feat-icon">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="22" height="16" rx="3"/>
+              <path d="M17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+              <path d="M6 6V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </div>
+          <h3>Control financiero</h3>
+          <p>Seguí el estado económico de tu obra en tiempo real: cuánto entra, cuánto falta cobrar y cómo evoluciona tu flujo de caja.</p>
+          <ul class="feat-list">
+            <li>Ingresos y cobros por etapa</li>
+            <li>Saldo pendiente de cobro</li>
+            <li>Visión clara del flujo de caja</li>
           </ul>
         </div>
-        <div class="feat-phone">
-          <div class="phone">
-            <img src="img-detalle.png" alt="Checklist de obra en Avanza" loading="lazy">
+
+        <!-- Card: Stock de obra -->
+        <div class="feat-card fu">
+          <div class="feat-icon">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="10" width="22" height="14" rx="2"/>
+              <path d="M6 10V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/>
+              <line x1="13" y1="14" x2="13" y2="20"/>
+              <line x1="10" y1="17" x2="16" y2="17"/>
+            </svg>
+          </div>
+          <h3>Stock de obra</h3>
+          <p>Registrá los materiales que se usaron por fuera del presupuesto original. Controlá el gasto real con un listado detallado exportable en PDF.</p>
+          <ul class="feat-list">
+            <li>Registro de materiales extra</li>
+            <li>Control de desvíos del presupuesto</li>
+            <li>Exportación en PDF lista para compartir</li>
+          </ul>
+          <div class="feat-phone">
+            <div class="phone">
+              <img src="img-stock.png" alt="Stock de obra en Avanza" loading="lazy">
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card: Avance de obra -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3,19 7,11 11,15 15,7 19,13 23,5"/>
-            <line x1="3" y1="23" x2="23" y2="23"/>
-          </svg>
-        </div>
-        <h3>Avance de obra</h3>
-        <p>Visualizá el progreso de cada etapa con porcentajes claros y actualizados. Sabé exactamente en qué punto está cada parte de tu proyecto.</p>
-        <ul class="feat-list">
-          <li>Progreso por etapa y sub-etapa</li>
-          <li>Historial de actualizaciones</li>
-        </ul>
-        <div class="feat-phone">
-          <div class="phone"><img src="img-overview.png" alt="Avance por etapas en Avanza" loading="lazy"></div>
-        </div>
-      </div>
+      </div> <!-- /feat-grid bloque 1 -->
+    </div> <!-- /bloque 1 -->
 
-      <!-- Card: Cliente en vivo -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 13s4-8 12-8 12 8 12 8-4 8-12 8-12-8-12-8z"/>
-            <circle cx="13" cy="13" r="3"/>
-          </svg>
-        </div>
-        <h3>Avance en vivo para el cliente</h3>
-        <p>Compartí un link único y seguro con tu cliente. Él ve el estado real de su obra sin llamarte, sin ir a la obra, sin necesitar login.</p>
-        <ul class="feat-list">
-          <li>Link único por proyecto</li>
-          <li>Sin login requerido para el cliente</li>
-          <li>Vista personalizada con tu marca</li>
-        </ul>
-        <div class="feat-phone">
-          <div class="phone"><img src="img-home.png" alt="Vista del cliente en Avanza" loading="lazy"></div>
-        </div>
-      </div>
+    <!-- ── Bloque 2 ── -->
+    <div>
+      <div class="feat-section-label">Para comunicarte con tu cliente</div>
+      <div class="feat-grid">
 
-      <!-- Card: Reportes -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="16" height="22" rx="2"/>
-            <line x1="9" y1="9"  x2="17" y2="9"/>
-            <line x1="9" y1="13" x2="17" y2="13"/>
-            <line x1="9" y1="17" x2="13" y2="17"/>
-          </svg>
-        </div>
-        <h3>Reportes automáticos</h3>
-        <p>Generá informes de avance en PDF con un click. Con tu logo, fotos, porcentajes por etapa y novedades. Listo para enviar al cliente.</p>
-        <ul class="feat-list">
-          <li>PDF con tu marca y logo</li>
-          <li>Fotos de avance incluidas</li>
-          <li>Envío directo por email</li>
-        </ul>
-      </div>
-
-
-      <!-- Card: Control financiero -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="6" width="22" height="16" rx="3"/>
-            <path d="M17 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-            <path d="M6 6V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/>
-          </svg>
-        </div>
-        <h3>Control financiero</h3>
-        <p>Seguí el estado económico de tu obra en tiempo real: cuánto entra, cuánto falta cobrar y cómo evoluciona tu flujo de caja.</p>
-        <ul class="feat-list">
-          <li>Ingresos y cobros por etapa</li>
-          <li>Saldo pendiente de cobro</li>
-          <li>Visión clara del flujo de caja</li>
-        </ul>
-      </div>
-
-      <!-- Card: Firma digital de comprobantes -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 2H6a2 2 0 0 0-2 2v18l4-4h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
-            <path d="M8 12c2-2 4 2 6 0s4-2 4 0" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Firma digital de comprobantes</h3>
-        <p>El cliente firma los comprobantes de pago por etapa directamente desde su celular. Sin papel, sin malentendidos, con registro permanente.</p>
-        <ul class="feat-list">
-          <li>Firma desde el celular del cliente</li>
-          <li>Comprobante por cada etapa pagada</li>
-          <li>Historial firmado disponible siempre</li>
-        </ul>
-      </div>
-
-      <!-- Card: Stock de obra -->
-      <div class="feat-card fu">
-        <div class="feat-icon">
-          <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="10" width="22" height="14" rx="2"/>
-            <path d="M6 10V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/>
-            <line x1="13" y1="14" x2="13" y2="20"/>
-            <line x1="10" y1="17" x2="16" y2="17"/>
-          </svg>
-        </div>
-        <h3>Stock de obra</h3>
-        <p>Registrá los materiales que se usaron por fuera del presupuesto original. Controlá el gasto real con un listado detallado exportable en PDF.</p>
-        <ul class="feat-list">
-          <li>Registro de materiales extra</li>
-          <li>Control de desvíos del presupuesto</li>
-          <li>Exportación en PDF lista para compartir</li>
-        </ul>
-        <div class="feat-phone">
-          <div class="phone">
-            <img src="img-stock.png" alt="Stock de obra en Avanza" loading="lazy">
+        <!-- Card: Cliente en vivo -->
+        <div class="feat-card fu">
+          <div class="feat-icon">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 13s4-8 12-8 12 8 12 8-4 8-12 8-12-8-12-8z"/>
+              <circle cx="13" cy="13" r="3"/>
+            </svg>
+          </div>
+          <h3>Avance en vivo para el cliente</h3>
+          <p>Compartí un link único y seguro con tu cliente. Él ve el estado real de su obra sin llamarte, sin ir a la obra, sin necesitar login.</p>
+          <ul class="feat-list">
+            <li>Link único por proyecto</li>
+            <li>Sin login requerido para el cliente</li>
+            <li>Vista personalizada con tu marca</li>
+          </ul>
+          <div class="feat-phone">
+            <div class="phone"><img src="img-home.png" alt="Vista del cliente en Avanza" loading="lazy"></div>
           </div>
         </div>
-      </div>
 
-    </div>
+        <!-- Card: Firma digital -->
+        <div class="feat-card fu">
+          <div class="feat-icon">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 2H6a2 2 0 0 0-2 2v18l4-4h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+              <path d="M8 12c2-2 4 2 6 0s4-2 4 0" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Firma digital de comprobantes</h3>
+          <p>El cliente firma los comprobantes de pago por etapa directamente desde su celular. Sin papel, sin malentendidos, con registro permanente.</p>
+          <ul class="feat-list">
+            <li>Firma desde el celular del cliente</li>
+            <li>Comprobante por cada etapa pagada</li>
+            <li>Historial firmado disponible siempre</li>
+          </ul>
+        </div>
+
+        <!-- Card: Reportes -->
+        <div class="feat-card fu">
+          <div class="feat-icon">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="16" height="22" rx="2"/>
+              <line x1="9" y1="9"  x2="17" y2="9"/>
+              <line x1="9" y1="13" x2="17" y2="13"/>
+              <line x1="9" y1="17" x2="13" y2="17"/>
+            </svg>
+          </div>
+          <h3>Reportes automáticos</h3>
+          <p>Generá informes de avance en PDF con un click. Con tu logo, fotos, porcentajes por etapa y novedades. Listo para enviar al cliente.</p>
+          <ul class="feat-list">
+            <li>PDF con tu marca y logo</li>
+            <li>Fotos de avance incluidas</li>
+            <li>Envío directo por email</li>
+          </ul>
+        </div>
+
+      </div> <!-- /feat-grid bloque 2 -->
+    </div> <!-- /bloque 2 -->
+
+    </div> <!-- /feat-sections -->
   </div>
 </section>
 
