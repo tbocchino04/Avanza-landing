@@ -311,7 +311,8 @@
       width: 100px; height: 4px;
       background: rgba(255,255,255,.28); border-radius: 100px; z-index: 5;
     }
-    .phone img { width: 100%; border-radius: 34px; display: block; }
+    .phone { aspect-ratio: 9 / 19.5; }
+    .phone img { width: 100%; height: 100%; border-radius: 34px; display: block; object-fit: cover; object-position: top; }
 
     .phones-duo { position: relative; height: 520px; width: 480px; flex-shrink: 0; }
     .phone-back {
