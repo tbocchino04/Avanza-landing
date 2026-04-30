@@ -641,7 +641,7 @@
 <section class="hero">
 
   <!-- Video de fondo -->
-  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="none"
          poster="hero.jpg" aria-hidden="true">
     <source src="hero.mp4" type="video/mp4">
   </video>
@@ -1064,11 +1064,15 @@
 </footer>
 
 <script>
-  // Force hero video play on mobile
+  // Skip video on mobile — poster covers it, saves 6MB
   const heroVideo = document.getElementById('heroVideo');
   if (heroVideo) {
-    heroVideo.play().catch(() => {});
-    document.addEventListener('touchstart', () => heroVideo.play().catch(() => {}), { once: true, passive: true });
+    if (window.innerWidth >= 768) {
+      heroVideo.play().catch(() => {});
+    } else {
+      heroVideo.querySelectorAll('source').forEach(s => s.remove());
+      heroVideo.load();
+    }
   }
 
   // Nav scroll + scroll cue (throttled via rAF)
