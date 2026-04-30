@@ -657,7 +657,7 @@
 <section class="hero">
 
   <!-- Video de fondo -->
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
          poster="hero.jpg" aria-hidden="true">
     <source src="hero.mp4" type="video/mp4">
   </video>
@@ -1132,6 +1132,13 @@
 </footer>
 
 <script>
+  // Force hero video play on mobile
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    heroVideo.play().catch(() => {});
+    document.addEventListener('touchstart', () => heroVideo.play().catch(() => {}), { once: true, passive: true });
+  }
+
   // Nav scroll + scroll cue (throttled via rAF)
   const nav = document.getElementById('nav');
   const scrollCue = document.getElementById('scrollCue');
