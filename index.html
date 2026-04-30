@@ -36,7 +36,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    html { -webkit-font-smoothing: antialiased; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
     :root {
       --v:        #5B3DC8;
@@ -343,6 +344,13 @@
     .wl-msg.ok  { color: #16A34A; }
     .wl-msg.err { color: #DC2626; }
     .wl-note { font-size: 12px; color: var(--concrete); opacity: .75; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .fu { opacity: 1; transform: none; }
+      .bldg-svg animate, .bldg-svg animateTransform { display: none; }
+    }
 
     /* ══════════════════════════════════════════════════════
        STATS STRIP
@@ -591,7 +599,7 @@
 
       <a href="#waitlist" class="btn btn-primary nav-cta">Empezar gratis</a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false" aria-controls="navMobile">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -687,10 +695,10 @@
       <div class="hero-visual">
         <div class="phones-duo">
           <div class="phone phone-back">
-            <img src="img-home.png" alt="Dashboard Avanza — Mis Obras">
+            <img src="img-home.png" alt="Dashboard Avanza — Mis Obras" width="390" height="844" loading="eager">
           </div>
           <div class="phone phone-front">
-            <img src="img-detalle.png" alt="Avanza — Detalle de obra con checklist">
+            <img src="img-detalle.png" alt="Avanza — Detalle de obra con checklist" width="390" height="844" loading="eager">
           </div>
         </div>
       </div>
@@ -716,6 +724,7 @@
       <h2>Sé de los primeros en <em>probar Avanza.</em></h2>
       <p class="waitlist-sub">Dejá tu email y te avisamos cuando abramos nuevos accesos. Sin spam, sin compromisos.</p>
       <form class="waitlist-form" id="wlForm">
+        <label for="wlEmail" class="sr-only">Tu email</label>
         <input class="wl-input" id="wlEmail" type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
         <button type="submit" class="btn btn-primary">Quiero acceso →</button>
       </form>
@@ -811,7 +820,7 @@
         </div>
         <div class="feat-phone" style="align-items:flex-start;">
           <div class="phone" style="width:100%;max-width:260px;">
-            <img src="img-detalle.png" alt="Checklist de obra en Avanza">
+            <img src="img-detalle.png" alt="Checklist de obra en Avanza" width="390" height="844" loading="lazy">
           </div>
         </div>
       </div>
@@ -832,7 +841,7 @@
           <li>Alertas automáticas por retrasos</li>
         </ul>
         <div class="feat-phone">
-          <div class="phone"><img src="img-overview.png" alt="Avance por etapas en Avanza"></div>
+          <div class="phone"><img src="img-overview.png" alt="Avance por etapas en Avanza" width="390" height="844" loading="lazy"></div>
         </div>
       </div>
 
@@ -852,7 +861,7 @@
           <li>Vista personalizada con tu marca</li>
         </ul>
         <div class="feat-phone">
-          <div class="phone"><img src="img-home.png" alt="Vista del cliente en Avanza"></div>
+          <div class="phone"><img src="img-home.png" alt="Vista del cliente en Avanza" width="390" height="844" loading="lazy"></div>
         </div>
       </div>
 
@@ -1086,11 +1095,13 @@
   toggle.addEventListener('click', () => {
     const open = mobile.classList.toggle('open');
     toggle.classList.toggle('x', open);
+    toggle.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
   mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     mobile.classList.remove('open');
     toggle.classList.remove('x');
+    toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }));
 
