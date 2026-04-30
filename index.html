@@ -8,6 +8,8 @@
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'><rect x='0' y='15' width='9' height='9' rx='2' fill='%235B3DC8'/><rect x='11.5' y='7.5' width='9' height='9' rx='2' fill='%235B3DC8' fill-opacity='.65'/><rect x='23' y='0' width='9' height='9' rx='2' fill='%235B3DC8' fill-opacity='.35'/></svg>" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0D0A1E">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
@@ -51,7 +53,7 @@
   </script>
 
   <!-- Preload hero image (LCP) -->
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="/hero.jpg" fetchpriority="high">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,9 +138,13 @@
       padding: 20px 0; transition: background .3s, padding .3s, box-shadow .3s;
     }
     .nav.scrolled {
-      background: rgba(255,255,255,.92); backdrop-filter: blur(16px);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 1px 0 rgba(91,61,200,.08); padding: 14px 0;
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .nav.scrolled { background: rgba(255,255,255,.82); }
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 
@@ -173,7 +179,7 @@
       padding-top: 148px; padding-bottom: clamp(80px, 10vw, 140px);
       background:
         linear-gradient(160deg, rgba(10,8,20,.80) 0%, rgba(25,15,8,.88) 100%),
-        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80') center 40% / cover no-repeat;
+        url('/hero.jpg') center 40% / cover no-repeat;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -1164,6 +1170,7 @@
           body: JSON.stringify({ email: document.getElementById('wlEmail').value })
         });
         const data = await res.json();
+        wlMsg.className = 'wl-msg';
         if (res.ok && !data.errors) {
           wlForm.style.display = 'none';
           wlMsg.textContent = '✓  ¡Listo! Te avisamos cuando lancemos.';
@@ -1172,8 +1179,8 @@
           throw new Error();
         }
       } catch {
+        wlMsg.className = 'wl-msg show err';
         wlMsg.textContent = '✕  Algo falló. Intentá de nuevo.';
-        wlMsg.classList.add('show', 'err');
         btn.disabled = false; btn.textContent = 'Quiero acceso →';
       }
     });
