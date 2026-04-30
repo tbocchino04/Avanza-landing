@@ -5,9 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Avanza — Gestión de Obra para Construcción</title>
   <meta name="description" content="Avanza centraliza el avance, las tareas y los reportes de tus proyectos de construcción. Reemplazá el Excel y el WhatsApp.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'><rect x='0' y='15' width='9' height='9' rx='2' fill='%235B3DC8'/><rect x='11.5' y='7.5' width='9' height='9' rx='2' fill='%235B3DC8' fill-opacity='.65'/><rect x='23' y='0' width='9' height='9' rx='2' fill='%235B3DC8' fill-opacity='.35'/></svg>" type="image/svg+xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://avanza-landing-xi.vercel.app/">
+  <meta property="og:title"       content="Avanza — Menos caos. Más obra.">
+  <meta property="og:description" content="Reemplazá el Excel y el WhatsApp. El avance real de tu proyecto de construcción, en tiempo real.">
+  <meta property="og:image"       content="https://avanza-landing-xi.vercel.app/og-image.png">
+  <meta property="og:locale"      content="es_AR">
+  <meta property="og:site_name"   content="Avanza">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Avanza — Menos caos. Más obra.">
+  <meta name="twitter:description" content="Reemplazá el Excel y el WhatsApp. El avance real de tu proyecto de construcción, en tiempo real.">
+  <meta name="twitter:image"       content="https://avanza-landing-xi.vercel.app/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://avanza-landing-xi.vercel.app/">
+
+  <!-- Preload hero image (LCP) -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80" fetchpriority="high">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
@@ -93,7 +119,7 @@
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .logo-word { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -1px; color: var(--dark); }
+    .logo-word { font-family: var(--hf); font-weight: 900; font-size: 22px; letter-spacing: -1px; color: var(--dark); }
 
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { font-size: 15px; font-weight: 500; color: var(--g700); transition: color .2s; }
@@ -114,7 +140,7 @@
     }
     .nav-mobile.open { display: flex; }
     .nav-mobile .nav-links { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .nav-mobile .nav-links a { font-family: var(--hf); font-size: 28px; color: var(--dark); padding: 8px 0; }
+    .nav-mobile .nav-links a { font-family: var(--hf); font-size: 28px; color: var(--dark); padding: 8px 0; letter-spacing: -0.03em; }
 
     /* ══════════════════════════════════════════════════════
        HERO
