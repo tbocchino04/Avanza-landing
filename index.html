@@ -457,7 +457,7 @@
        HOW IT WORKS
     ══════════════════════════════════════════════════════ */
     .how { padding: clamp(80px, 10vw, 140px) 0; background: var(--white); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 64px; position: relative; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 64px; position: relative; list-style: none; padding: 0; }
     .steps::before {
       content: ''; position: absolute;
       top: 32px; left: calc(100%/6); right: calc(100%/6);
@@ -919,23 +919,23 @@
       <h2>En 3 pasos, tu obra organizada</h2>
       <p>Sin capacitaciones largas, sin onboarding complicado. Menos de 10 minutos y tenés tu primer proyecto activo.</p>
     </div>
-    <div class="steps">
-      <div class="step fu">
-        <div class="step-num">1</div>
+    <ol class="steps" role="list">
+      <li class="step fu">
+        <div class="step-num" aria-hidden="true">1</div>
         <h3>Creá tu proyecto</h3>
         <p>Cargá las etapas, rubros y tareas de tu obra. Invitá a tu equipo con un link. Sin instalaciones, desde el navegador.</p>
-      </div>
-      <div class="step fu">
-        <div class="step-num">2</div>
+      </li>
+      <li class="step fu">
+        <div class="step-num" aria-hidden="true">2</div>
         <h3>Registrá el avance</h3>
         <p>Tu equipo actualiza el progreso desde el celular, desde el campo. Con fotos, notas y porcentajes, en tiempo real.</p>
-      </div>
-      <div class="step fu">
-        <div class="step-num">3</div>
+      </li>
+      <li class="step fu">
+        <div class="step-num" aria-hidden="true">3</div>
         <h3>Compartí con tu cliente</h3>
         <p>Tu cliente accede al estado de su obra con un link. Sin aplicaciones, sin contraseñas. Transparencia total, cero llamadas.</p>
-      </div>
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -1110,12 +1110,19 @@
 </footer>
 
 <script>
-  // Nav scroll + scroll cue
+  // Nav scroll + scroll cue (throttled via rAF)
   const nav = document.getElementById('nav');
   const scrollCue = document.getElementById('scrollCue');
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-    scrollCue.classList.toggle('hidden', window.scrollY > 80);
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+        scrollCue.classList.toggle('hidden', window.scrollY > 80);
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
   }, { passive: true });
 
   // Mobile menu
