@@ -1064,15 +1064,11 @@
 </footer>
 
 <script>
-  // Skip video on mobile — poster covers it, saves 6MB
+  // Force hero video play (including mobile)
   const heroVideo = document.getElementById('heroVideo');
   if (heroVideo) {
-    if (window.innerWidth >= 768) {
-      heroVideo.play().catch(() => {});
-    } else {
-      heroVideo.querySelectorAll('source').forEach(s => s.remove());
-      heroVideo.load();
-    }
+    heroVideo.play().catch(() => {});
+    document.addEventListener('touchstart', () => heroVideo.play().catch(() => {}), { once: true, passive: true });
   }
 
   // Nav scroll + scroll cue (throttled via rAF)
