@@ -360,18 +360,20 @@
     .waitlist h2 em { font-style: normal; color: var(--v); }
     .waitlist-sub { font-size: 16px; color: var(--concrete); line-height: 1.65; max-width: 460px; }
     .waitlist-form {
-      display: flex; gap: 10px; width: 100%; max-width: 500px;
-      flex-wrap: wrap; justify-content: center; margin-top: 4px;
+      display: flex; flex-direction: column; gap: 10px;
+      width: 100%; max-width: 440px; margin-top: 4px;
     }
-    .wl-input {
-      flex: 1; min-width: 240px;
-      padding: 14px 18px; border-radius: 10px;
+    .wl-row { display: flex; gap: 10px; }
+    .wl-row .wl-input { flex: 1; min-width: 0; }
+    .wl-input, .wl-select {
+      width: 100%; padding: 14px 18px; border-radius: 10px;
       border: 1.5px solid var(--sand-d);
       font-family: var(--bf); font-size: 15px; color: var(--dark);
       background: var(--white); outline: none;
       transition: border-color .2s, box-shadow .2s;
     }
-    .wl-input:focus { border-color: var(--v); box-shadow: 0 0 0 3px rgba(91,61,200,.1); }
+    .wl-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23706D8A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    .wl-input:focus, .wl-select:focus { border-color: var(--v); box-shadow: 0 0 0 3px rgba(91,61,200,.1); }
     .wl-input::placeholder { color: var(--concrete); }
     .wl-msg {
       font-size: 14px; font-weight: 500; display: none;
@@ -381,11 +383,13 @@
     .wl-msg.ok  { color: #16A34A; }
     .wl-msg.err { color: #DC2626; }
     .wl-note { font-size: 12px; color: var(--concrete); opacity: .75; }
-    .wl-input--dark {
+    .wl-input--dark, .wl-select--dark {
       background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); color: var(--white);
     }
+    .wl-select--dark { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,.5)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); }
+    .wl-select--dark option { background: #1A1730; color: var(--white); }
     .wl-input--dark::placeholder { color: rgba(255,255,255,.4); }
-    .wl-input--dark:focus { border-color: var(--vl); box-shadow: 0 0 0 3px rgba(155,114,248,.25); }
+    .wl-input--dark:focus, .wl-select--dark:focus { border-color: var(--vl); box-shadow: 0 0 0 3px rgba(155,114,248,.25); }
     .wl-note--dark { color: rgba(255,255,255,.45); opacity: 1; }
     .cta-fin h2 em { font-style: normal; color: var(--vl); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -1067,9 +1071,27 @@
       <h2>Sé de los primeros en <em>probar Avanza.</em></h2>
       <p class="waitlist-sub">Dejá tu email y te avisamos cuando abramos nuevos accesos. Sin spam, sin compromisos.</p>
       <form class="waitlist-form" id="wlForm">
-        <label for="wlEmail" class="sr-only">Tu email</label>
-        <input class="wl-input wl-input--dark" id="wlEmail" type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
-        <button type="submit" class="btn btn-amber btn-lg">Quiero acceso →</button>
+        <!-- Honeypot — invisible para humanos, bots lo llenan -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+
+        <div class="wl-row">
+          <label for="wlName" class="sr-only">Tu nombre</label>
+          <input class="wl-input wl-input--dark" id="wlName" type="text" name="nombre" placeholder="Tu nombre" required autocomplete="given-name">
+          <label for="wlEmail" class="sr-only">Tu email</label>
+          <input class="wl-input wl-input--dark" id="wlEmail" type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+        </div>
+
+        <label for="wlRol" class="sr-only">Tu rol</label>
+        <select class="wl-select wl-select--dark" id="wlRol" name="rol" required>
+          <option value="" disabled selected>¿Cuál es tu rol?</option>
+          <option value="Constructor">Constructor</option>
+          <option value="Arquitecto">Arquitecto</option>
+          <option value="Jefe de obra">Jefe de obra</option>
+          <option value="Desarrollador inmobiliario">Desarrollador inmobiliario</option>
+          <option value="Otro">Otro</option>
+        </select>
+
+        <button type="submit" class="btn btn-amber btn-lg" style="width:100%;">Quiero acceso →</button>
       </form>
       <span class="wl-msg" id="wlMsg"></span>
       <p class="wl-note wl-note--dark">Sin tarjeta de crédito &nbsp;·&nbsp; Tu email es privado</p>
